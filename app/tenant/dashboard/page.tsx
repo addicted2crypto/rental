@@ -1,13 +1,15 @@
 "use client"
 
+import { CardFooter } from "@/components/ui/card"
+
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, FileText, Key, Search } from "lucide-react"
+import { Home, FileText, Key, Calendar, Search } from "lucide-react"
 import TenantLayout from "@/components/tenant-layout"
 
 export default function TenantDashboard() {
@@ -66,56 +68,39 @@ export default function TenantDashboard() {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Current Rental</CardTitle>
+              <Home className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">123 Main St</div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Active Applications</CardTitle>
+              <FileText className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">2</div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Access Keys</CardTitle>
+              <Key className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">1</div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Upcoming Tours</CardTitle>
               <Calendar className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{upcomingTours.length}</div>
-              <p className="text-xs text-muted-foreground">Scheduled property tours</p>
+              <div className="text-2xl font-bold">3</div>
             </CardContent>
-            <CardFooter>
-              <Link href="/tenant/tours">
-                <Button variant="outline" size="sm">
-                  View All
-                </Button>
-              </Link>
-            </CardFooter>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Applications</CardTitle>
-              <FileText className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{applications.length}</div>
-              <p className="text-xs text-muted-foreground">Rental applications</p>
-            </CardContent>
-            <CardFooter>
-              <Link href="/tenant/applications">
-                <Button variant="outline" size="sm">
-                  View All
-                </Button>
-              </Link>
-            </CardFooter>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Leases</CardTitle>
-              <Key className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{leases.filter((l) => l.status === "active").length}</div>
-              <p className="text-xs text-muted-foreground">Current rental agreements</p>
-            </CardContent>
-            <CardFooter>
-              <Link href="/tenant/leases">
-                <Button variant="outline" size="sm">
-                  View All
-                </Button>
-              </Link>
-            </CardFooter>
           </Card>
         </div>
 

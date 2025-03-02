@@ -1,10 +1,12 @@
 "use client"
 import Link from "next/link"
+import { CardFooter } from "@/components/ui/card"
+
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
-import { Building, Calendar, FileText, Key, Plus } from "lucide-react"
+import { Building, Calendar, FileText, Key, Plus, Users } from "lucide-react"
 import LandlordLayout from "@/components/landlord-layout"
 
 export default function LandlordDashboard() {
@@ -48,74 +50,39 @@ export default function LandlordDashboard() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Properties</CardTitle>
+              <CardTitle className="text-sm font-medium">Total Properties</CardTitle>
               <Building className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{properties.length}</div>
-              <p className="text-xs text-muted-foreground">Total properties</p>
+              <div className="text-2xl font-bold">10</div>
             </CardContent>
-            <CardFooter>
-              <Link href="/landlord/properties">
-                <Button variant="outline" size="sm">
-                  View All
-                </Button>
-              </Link>
-            </CardFooter>
           </Card>
-
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Applications</CardTitle>
+              <CardTitle className="text-sm font-medium">Pending Applications</CardTitle>
               <FileText className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{pendingApplications.length}</div>
-              <p className="text-xs text-muted-foreground">Pending applications</p>
+              <div className="text-2xl font-bold">5</div>
             </CardContent>
-            <CardFooter>
-              <Link href="/landlord/applications">
-                <Button variant="outline" size="sm">
-                  View All
-                </Button>
-              </Link>
-            </CardFooter>
           </Card>
-
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Leases</CardTitle>
-              <FileText className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">Active Tenants</CardTitle>
+              <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{pendingLeases.length}</div>
-              <p className="text-xs text-muted-foreground">Pending signatures</p>
+              <div className="text-2xl font-bold">8</div>
             </CardContent>
-            <CardFooter>
-              <Link href="/landlord/leases">
-                <Button variant="outline" size="sm">
-                  View All
-                </Button>
-              </Link>
-            </CardFooter>
           </Card>
-
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Tours</CardTitle>
+              <CardTitle className="text-sm font-medium">Upcoming Tours</CardTitle>
               <Calendar className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{upcomingTours.length}</div>
-              <p className="text-xs text-muted-foreground">Upcoming property tours</p>
+              <div className="text-2xl font-bold">3</div>
             </CardContent>
-            <CardFooter>
-              <Link href="/landlord/tours">
-                <Button variant="outline" size="sm">
-                  View All
-                </Button>
-              </Link>
-            </CardFooter>
           </Card>
         </div>
 
@@ -147,7 +114,8 @@ export default function LandlordDashboard() {
                       <CardDescription>
                         {property.status === "vacant" && "Available for rent"}
                         {property.status === "occupied" &&
-                          `Leased until ${new Date(property.leaseEnd).toLocaleDateString()}`}
+                          `Leased until ${property.leaseEnd ? new Date(property.leaseEnd).toLocaleDateString() : "N/A"}`}
+
                         {property.status === "pending" && "Application pending"}
                       </CardDescription>
                     </CardHeader>
